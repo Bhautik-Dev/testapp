@@ -15,6 +15,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   List<dynamic> blogList = [];
+  bool isLoding=false;
   @override
   void initState() {
     // TODO: implement initState
@@ -40,6 +41,7 @@ class _HomePageState extends State<HomePage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
+
                 SizedBox(
                   height: 20,
                 ),
@@ -82,7 +84,7 @@ class _HomePageState extends State<HomePage> {
                   height: 380,
                   width: MediaQuery.of(context).size.width,
                   // color: Colors.red,
-                  child: ListView.builder(
+                  child: isLoding==true?Center(child: CircularProgressIndicator(color: Colors.red,)):ListView.builder(
                     shrinkWrap: true,
                     itemCount: blogList.length,
                     scrollDirection: Axis.horizontal,
@@ -112,11 +114,11 @@ class _HomePageState extends State<HomePage> {
                             SizedBox(
                               height: 15,
                             ),
-                            Expanded(
+                            Flexible(
                               child: Text(
                                 blogList[index]["meta_description"].toString() ,
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 3,
+                                // overflow: TextOverflow.ellipsis,
+                                // maxLines: 3,
                                 style: TextStyle(
                                   color: Colors.white,
                                 ),
@@ -253,12 +255,14 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future getdata() async {
+    isLoding=true;
     var response = await http.get(Uri.parse(
         "http://194.195.86.168:9000/blog/get_all_blogs?user_id=939f432f-a986-4507-9df4-3f6f55e33686"));
-    print(response.statusCode);
     if(response.statusCode==200){
+      isLoding=true;
       var data = jsonDecode(response.body);
       blogList=data['data'];
+      isLoding=false;
       setState(() {
 
       });
