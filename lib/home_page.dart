@@ -14,7 +14,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List<String> blogList = [];
+  List<dynamic> blogList = [];
   @override
   void initState() {
     // TODO: implement initState
@@ -114,9 +114,9 @@ class _HomePageState extends State<HomePage> {
                             ),
                             Expanded(
                               child: Text(
+                                blogList[index]["meta_description"].toString() ,
                                 overflow: TextOverflow.ellipsis,
                                 maxLines: 3,
-                                "Baltimore Bridge Collapse:New Channels to Aid Port Traffic,recovery Efforts Progress",
                                 style: TextStyle(
                                   color: Colors.white,
                                 ),
@@ -252,12 +252,16 @@ class _HomePageState extends State<HomePage> {
         ));
   }
 
-  getdata() async {
+  Future getdata() async {
     var response = await http.get(Uri.parse(
         "http://194.195.86.168:9000/blog/get_all_blogs?user_id=939f432f-a986-4507-9df4-3f6f55e33686"));
+    print(response.statusCode);
     if(response.statusCode==200){
       var data = jsonDecode(response.body);
       blogList=data['data'];
+      setState(() {
+
+      });
     }
   }
 }
