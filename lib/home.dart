@@ -4,10 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
-import 'package:testapp/chatroom.dart';
-import 'package:testapp/explore.dart';
-import 'package:testapp/finance.dart';
-import 'package:testapp/post.dart';
+
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -89,7 +86,6 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             indicatorColor: Colors.white,
             labelColor: Colors.white,
             isScrollable: true,
-
             tabAlignment: TabAlignment.start,
             unselectedLabelStyle: TextStyle(color: Colors.grey.shade400),
             // labelPadding: EdgeInsets.symmetric(horizontal: 9),
@@ -184,7 +180,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                       Flexible(
                                         child: Text(
                                           blogList[index]
-                                          ["meta_description"]
+                                          ["meta_description"]??""
                                               .toString(),
                                           overflow: TextOverflow.ellipsis,
                                           maxLines: 3,
