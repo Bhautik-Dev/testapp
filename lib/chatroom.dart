@@ -140,7 +140,7 @@ class _ChatRoomPageState extends State<ChatRoomPage> with TickerProviderStateMix
                       setState(() {});
                     },
                     child: Container(
-                      margin: EdgeInsets.symmetric(horizontal: 5),
+                      // margin: EdgeInsets.symmetric(horizontal: 5),
                       padding: EdgeInsets.symmetric(
                           horizontal: 14, vertical: 38),
                       decoration: BoxDecoration(
@@ -178,7 +178,7 @@ class _ChatRoomPageState extends State<ChatRoomPage> with TickerProviderStateMix
                   ),
                 ),
                 SizedBox(
-                  width: 5,
+                  width: 10,
                 ),
                 Expanded(
                   child: InkWell(
@@ -187,7 +187,7 @@ class _ChatRoomPageState extends State<ChatRoomPage> with TickerProviderStateMix
                       setState(() {});
                     },
                     child: Container(
-                      margin: EdgeInsets.symmetric(horizontal: 5),
+                      // margin: EdgeInsets.symmetric(horizontal: 5),
                       padding: EdgeInsets.symmetric(
                           horizontal: 14, vertical: 31),
                       decoration: BoxDecoration(
