@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:testapp/controller/home_controller.dart';
+import 'package:testapp/widget/bottom_widget.dart';
+import 'package:testapp/widget/custom_drawer.dart';
 class ExplorePage extends StatefulWidget {
   const ExplorePage({super.key});
 
@@ -7,13 +11,18 @@ class ExplorePage extends StatefulWidget {
 }
 
 class _ExplorePageState extends State<ExplorePage> {
+  HomeController homeController=Get.find();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: homeController.drawaerkey,
       appBar: AppBar(
-        leading: Icon(
-          Icons.format_align_left_rounded,
-          color: Colors.white,
+        leading: IconButton(
+          icon:Icon(Icons.format_align_left_rounded),
+          color: Colors.white, onPressed: () {
+          homeController.drawaerkey.currentState!.openDrawer();
+          homeController.isDrawerOpen.value = true;
+        },
         ),
 
         backgroundColor: Colors.black,
@@ -23,6 +32,11 @@ class _ExplorePageState extends State<ExplorePage> {
         ),
         centerTitle: true,
       ),
+      drawer: const CustomDrawer(),
+      onDrawerChanged: (isOpened) {
+        homeController.isDrawerOpen.value = isOpened;
+      },
+
       backgroundColor: Colors.black,
     body: Column(
       children: [
@@ -52,6 +66,7 @@ class _ExplorePageState extends State<ExplorePage> {
         ),
       ],
     ),
+      // bottomNavigationBar:BottomDesing()
     );
   }
 }

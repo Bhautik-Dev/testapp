@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:testapp/widget/custom_drawer.dart';
+
+import 'controller/home_controller.dart';
 class PostPage extends StatefulWidget {
   const PostPage({super.key});
 
@@ -7,24 +11,31 @@ class PostPage extends StatefulWidget {
 }
 
 class _PostPageState extends State<PostPage> {
+  HomeController homeController=Get.find();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: homeController.drawaerkey,
       appBar: AppBar(
         backgroundColor: Colors.grey.shade900,
-            title: Text("Create Post",style: TextStyle(color: Colors.white),),
+            title: const Text("Create Post",style: TextStyle(color: Colors.white),),
         centerTitle: true,
-        actions: [
+        actions: const [
           Text("Publish",style: TextStyle(color: Colors.grey),),
           SizedBox(
             width: 15,
           )
         ],
       ),
+      drawer: const CustomDrawer(),
+      onDrawerChanged: (isOpened) {
+        homeController.isDrawerOpen.value = isOpened;
+      },
+
       backgroundColor: Colors.black,
       body: Container(
-        padding: EdgeInsets.symmetric(horizontal: 20,vertical: 15),
-        child: Column(
+        padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 15),
+        child: const Column(
           children: [
             Row(
               children: [
@@ -39,7 +50,7 @@ class _PostPageState extends State<PostPage> {
                   ],
                 )
               ],
-            )
+            ),
           ],
         ),
       ),
