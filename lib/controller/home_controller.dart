@@ -1,5 +1,7 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
 
 class HomeController extends GetxController {
   RxInt selectedPosition = 0.obs;
@@ -132,4 +134,19 @@ class HomeController extends GetxController {
     "Security",
     "Military"
   ];
+
+RxList<dynamic> getDataList=[].obs;
+  RxBool isLoding = false.obs;
+
+  getData() async {
+    getDataList.clear();
+    isLoding=true.obs;
+    var responce = await http.get(Uri.parse("https://api.bnn.network/api/v1/post/1505190"));
+    if(responce.statusCode==200){
+      isLoding=true.obs;
+      var data = jsonDecode(responce.body);
+      getDataList.add(data['data']);
+      isLoding=false.obs;
+    }
+  }
 }

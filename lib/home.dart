@@ -1,14 +1,7 @@
-import 'dart:convert';
-import 'dart:ui';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:http/http.dart' as http;
+import 'package:testapp/blog_full_page.dart';
 import 'package:testapp/controller/home_controller.dart';
-import 'package:testapp/widget/bottom_widget.dart';
-
-import 'widget/custom_drawer.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -21,14 +14,14 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   HomeController homeController = Get.find();
   List<dynamic> blogList = [];
   late TabController tabController;
-  bool isLoding = false;
+
 
   // Create a key
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    // getdata();
+    homeController.getData();
     tabController = TabController(length: 9, vsync: this);
   }
 
@@ -38,7 +31,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       key: homeController.drawaerkey,
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Icons.format_align_left_rounded),
+          icon: const Icon(Icons.format_align_left_rounded),
           color: Colors.white,
           onPressed: () {
             homeController.drawaerkey.currentState!.openDrawer();
@@ -46,7 +39,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             // debugPrint("Drawer=>${homeController.isDrawerOpen.value}");
           },
         ),
-        actions: [
+        actions: const [
           Icon(
             Icons.notifications,
             color: Colors.white,
@@ -56,7 +49,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
           )
         ],
         backgroundColor: Colors.black,
-        title: Text(
+        title: const Text(
           "Home",
           style: TextStyle(color: Colors.white),
         ),
@@ -67,7 +60,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
           width: Get.width,
           child: SafeArea(
             child: Padding(
-              padding: EdgeInsets.symmetric(vertical: 40, horizontal: 20),
+              padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 20),
               child: SingleChildScrollView(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -101,7 +94,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                       ],
                     ),
                     Container(),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     Align(
@@ -112,18 +105,18 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                             color: Colors.grey.shade800, fontSize: 16),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
-                    WidgetBreakingNews1(),
-                    WidgetPolitics1(),
-                    WidgetSports1(),
-                    WidgetTech1(),
-                    WidgetFinance1(),
-                    WidgetLifestyle1(),
-                    WidgetWorld1(),
-                    WidgetArtsAndEntertainment1(),
-                    WidgetConflictAndDefence1(),
+                    widgetBreakingNews1(),
+                    widgetPolitics1(),
+                    widgetSports1(),
+                    widgetTech1(),
+                    widgetFinance1(),
+                    widgetLifestyle1(),
+                    widgetWorld1(),
+                    widgetArtsAndEntertainment1(),
+                    widgetConflictAndDefence1(),
                     const SizedBox(
                       height: 12,
                     ),
@@ -160,23 +153,23 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       backgroundColor: Colors.black,
       body: Column(
         children: [
-          SizedBox(
+          const SizedBox(
             height: 15,
           ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 15),
+            padding: const EdgeInsets.symmetric(horizontal: 15),
             child: TextFormField(
               decoration: InputDecoration(
                   hintText: "Search here...",
-                  hintStyle: TextStyle(color: Colors.white),
-                  prefixIcon: Icon(
+                  hintStyle: const TextStyle(color: Colors.white),
+                  prefixIcon: const Icon(
                     Icons.search_rounded,
                     color: Colors.white,
                   ),
                   focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(30)),
                   contentPadding:
-                      EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                      const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
                   // focusColor: Colors.black12,
                   fillColor: Colors.grey.shade800,
                   filled: true,
@@ -184,11 +177,11 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                       borderRadius: BorderRadius.circular(30))),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 15,
           ),
           TabBar.secondary(
-            physics: BouncingScrollPhysics(),
+            physics: const BouncingScrollPhysics(),
             controller: tabController,
             dividerColor: Colors.grey.shade800,
             indicatorColor: Colors.white,
@@ -198,7 +191,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             unselectedLabelStyle: TextStyle(color: Colors.grey.shade400),
             // labelPadding: EdgeInsets.symmetric(horizontal: 9),
             // padding: EdgeInsets.only(left: 10),
-            tabs: [
+            tabs: const [
               Tab(
                 text: 'For you',
               ),
@@ -236,17 +229,17 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 // Tab Widget
   widgetForYou() {
     return ListView(
-      physics: BouncingScrollPhysics(),
+      physics: const BouncingScrollPhysics(),
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
-              Row(
+              const Row(
                 children: [
                   Text(
                     "Popular",
@@ -257,124 +250,118 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 24,
               ),
-              Container(
-                height: MediaQuery.of(context).size.height * 0.52,
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.41,
                 width: MediaQuery.of(context).size.width,
                 // color: Colors.red,
-                child: isLoding == true
-                    ? Center(
+                child: homeController.isLoding == true
+                    ? const Center(
                         child: CircularProgressIndicator(
                         color: Colors.red,
                       ))
-                    : ListView.builder(
-                        shrinkWrap: true,
-                        itemCount: blogList.length,
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (context, index) {
-                          return Container(
-                            width: 270,
-                            // height: ,
-                            padding: EdgeInsets.only(bottom: 10),
-                            // padding: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
-                            decoration: BoxDecoration(
-                                // color: Colors.grey,
-                                borderRadius: BorderRadius.circular(15)),
-                            child: Column(
-                              // mainAxisAlignment: MainAxisAlignment.start,
-                              mainAxisSize: MainAxisSize.min,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                SizedBox(
-                                  // height: 250,
-                                  width: MediaQuery.of(context).size.width,
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(15),
-                                    child: Container(
-                                      child: Image.network(
-                                        "https://static.toiimg.com/photo/msid-88579058/88579058.jpg?pl=37494",
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 15,
-                                ),
-                                Flexible(
-                                  child: ListView.builder(
-                                    itemCount: blogList.length,
-                                    physics: NeverScrollableScrollPhysics(),
-                                    itemBuilder: (context, index) {
-                                      return Text(
-                                        blogList[index]['meta_description'] ??
-                                            "".toString(),
-                                        overflow: TextOverflow.ellipsis,
-                                        maxLines: 3,
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.w500,
-                                          color: Colors.white,
-                                        ),
-                                      );
-                                    },
-                                  ),
-                                ),
-                                // SizedBox(
-                                //   height: 20,
-                                // ),
-                                Row(
-                                  children: [
-                                    Container(
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: 5, vertical: 3),
-                                      decoration: BoxDecoration(
-                                          color: Colors.red,
-                                          borderRadius:
-                                              BorderRadius.circular(10)),
-                                      child: (Text(
-                                        "BNN News",
-                                        style: TextStyle(color: Colors.white),
-                                      )),
-                                    ),
-                                    // SizedBox(
-                                    //   width: 10,
-                                    // ),
-                                    SizedBox(
-                                      width: 5,
-                                    ),
-                                    Icon(
-                                      Icons.star_border_outlined,
-                                      color: Colors.red,
-                                      size: 17,
-                                    ),
-                                    SizedBox(
-                                      width: 2,
-                                    ),
-                                    Text("•",
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            color: Colors.white54)),
-                                    SizedBox(
-                                      width: 2,
-                                    ),
-                                    Text("43 minutes read",
-                                        style: TextStyle(
-                                            fontSize: 10,
-                                            color: Colors.white54))
-                                  ],
-                                )
-                              ],
+                    :Obx(() =>  ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: homeController.getDataList.length,
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index) {
+                    return Container(
+                      width: 270,
+                      // height: ,
+                      padding: const EdgeInsets.only(bottom: 10),
+                      // padding: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
+                      decoration: BoxDecoration(
+                        // color: Colors.grey,
+                          borderRadius: BorderRadius.circular(15)),
+                      child: Column(
+                        // mainAxisAlignment: MainAxisAlignment.start,
+                        // mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            // height: 250,
+                            width: MediaQuery.of(context).size.width,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(15),
+                              child: Image.network(
+                                "https://static.toiimg.com/photo/msid-88579058/88579058.jpg?pl=37494",
+                                fit: BoxFit.cover,
+                              ),
                             ),
-                          );
-                        },
+                          ),
+                          const SizedBox(
+                            height: 15,
+                          ),
+                          Flexible(
+                            child:Obx(() =>  ListView.builder(
+                              itemCount: homeController.getDataList.length,
+                              physics: const NeverScrollableScrollPhysics(),
+                              itemBuilder: (context, index) {
+                                return Text(
+                                  homeController.getDataList[index]['description']??"",
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 3,
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.white,
+                                  ),
+                                );
+                              },
+                            ),)
+                          ),
+                          Row(
+                            children: [
+                              Container(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 5, vertical: 3),
+                                decoration: BoxDecoration(
+                                    color: Colors.red,
+                                    borderRadius:
+                                    BorderRadius.circular(10)),
+                                child: (const Text(
+                                  "BNN News",
+                                  style: TextStyle(color: Colors.white),
+                                )),
+                              ),
+                              // SizedBox(
+                              //   width: 10,
+                              // ),
+                              const SizedBox(
+                                width: 5,
+                              ),
+                              const Icon(
+                                Icons.star_border_outlined,
+                                color: Colors.red,
+                                size: 17,
+                              ),
+                              const SizedBox(
+                                width: 2,
+                              ),
+                              const Text("•",
+                                  style: TextStyle(
+                                      fontSize: 15,
+                                      color: Colors.white54)),
+                              const SizedBox(
+                                width: 2,
+                              ),
+                              const Text("43 minutes read",
+                                  style: TextStyle(
+                                      fontSize: 10,
+                                      color: Colors.white54))
+                            ],
+                          )
+                        ],
                       ),
+                    );
+                  },
+                ),)
               ),
-              SizedBox(
+              const SizedBox(
                 height: 25,
               ),
-              Row(
+              const Row(
                 children: [
                   Text(
                     "Selected for you",
@@ -385,22 +372,25 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
-              Container(
-                child: ListView.separated(
-                    shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
-                    itemBuilder: (context, index) {
-                      return Container(
+              ListView.separated(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemBuilder: (context, index) {
+                    return InkWell(
+                      onTap: () {
+                        Get.to(BlogFullPage());
+                      },
+                      child: Container(
                         // height: 100,
                         width: MediaQuery.of(context).size.width,
                         // margin: EdgeInsets.symmetric(horizontal: 20),
-                        padding: EdgeInsets.symmetric(horizontal: 15),
+                        padding: const EdgeInsets.symmetric(horizontal: 15),
                         child: Row(
                           children: [
-                            Expanded(
+                            const Expanded(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -526,13 +516,13 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                             ),
                           ],
                         ),
-                      );
-                    },
-                    separatorBuilder: (context, index) {
-                      return Divider();
-                    },
-                    itemCount: 5),
-              )
+                      ),
+                    );
+                  },
+                  separatorBuilder: (context, index) {
+                    return const Divider();
+                  },
+                  itemCount: 5)
             ],
           ),
         ),
@@ -545,13 +535,11 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         child: SingleChildScrollView(
       child: Column(
         children: [
-          Container(
-            child: Column(
-              children: [
-                Image.network(
-                    'https://static.toiimg.com/photo/msid-88579058/88579058.jpg?pl=37494')
-              ],
-            ),
+          Column(
+            children: [
+              Image.network(
+                  'https://static.toiimg.com/photo/msid-88579058/88579058.jpg?pl=37494')
+            ],
           )
         ],
       ),
@@ -560,21 +548,21 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
   widgetBreakingNews() {
     return ListView.separated(
-        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
         shrinkWrap: true,
-        physics: BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         itemBuilder: (context, index) {
           return Container(
             // height: 100,
             width: MediaQuery.of(context).size.width,
             // margin: EdgeInsets.symmetric(horizontal: 20),
-            padding: EdgeInsets.symmetric(horizontal: 15),
+            padding: const EdgeInsets.symmetric(horizontal: 15),
             child: Column(
               children: [
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
+                    const Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         // CircleAvatar(
@@ -609,12 +597,12 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                 TextStyle(fontSize: 10, color: Colors.white54)),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     Row(
                       children: [
-                        Flexible(
+                        const Flexible(
                           child: Text(
                             overflow: TextOverflow.ellipsis,
                             maxLines: 3,
@@ -640,10 +628,10 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
-                    Row(
+                    const Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Icon(
@@ -711,21 +699,21 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
   widgetWatchNow() {
     return ListView.separated(
-        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
         shrinkWrap: true,
-        physics: BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         itemBuilder: (context, index) {
           return Container(
             // height: 100,
             width: MediaQuery.of(context).size.width,
             // margin: EdgeInsets.symmetric(horizontal: 20),
-            padding: EdgeInsets.symmetric(horizontal: 15),
+            padding: const EdgeInsets.symmetric(horizontal: 15),
             child: Column(
               children: [
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
+                    const Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         // CircleAvatar(
@@ -760,12 +748,12 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                 TextStyle(fontSize: 10, color: Colors.white54)),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     Row(
                       children: [
-                        Flexible(
+                        const Flexible(
                           child: Text(
                             overflow: TextOverflow.ellipsis,
                             maxLines: 3,
@@ -791,10 +779,10 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
-                    Row(
+                    const Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Icon(
@@ -862,21 +850,21 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
   widgetWorld() {
     return ListView.separated(
-        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
         shrinkWrap: true,
-        physics: BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         itemBuilder: (context, index) {
           return Container(
             // height: 100,
             width: MediaQuery.of(context).size.width,
             // margin: EdgeInsets.symmetric(horizontal: 20),
-            padding: EdgeInsets.symmetric(horizontal: 15),
+            padding: const EdgeInsets.symmetric(horizontal: 15),
             child: Column(
               children: [
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
+                    const Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         // CircleAvatar(
@@ -911,12 +899,12 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                 TextStyle(fontSize: 10, color: Colors.white54)),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     Row(
                       children: [
-                        Flexible(
+                        const Flexible(
                           child: Text(
                             overflow: TextOverflow.ellipsis,
                             maxLines: 3,
@@ -942,10 +930,10 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
-                    Row(
+                    const Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Icon(
@@ -1013,21 +1001,21 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
   widgetPolitics() {
     return ListView.separated(
-        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
         shrinkWrap: true,
-        physics: BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         itemBuilder: (context, index) {
           return Container(
             // height: 100,
             width: MediaQuery.of(context).size.width,
             // margin: EdgeInsets.symmetric(horizontal: 20),
-            padding: EdgeInsets.symmetric(horizontal: 15),
+            padding: const EdgeInsets.symmetric(horizontal: 15),
             child: Column(
               children: [
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
+                    const Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         // CircleAvatar(
@@ -1062,12 +1050,12 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                 TextStyle(fontSize: 10, color: Colors.white54)),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     Row(
                       children: [
-                        Flexible(
+                        const Flexible(
                           child: Text(
                             overflow: TextOverflow.ellipsis,
                             maxLines: 3,
@@ -1093,10 +1081,10 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
-                    Row(
+                    const Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Icon(
@@ -1164,21 +1152,21 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
   widgetSports() {
     return ListView.separated(
-        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
         shrinkWrap: true,
-        physics: BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         itemBuilder: (context, index) {
           return Container(
             // height: 100,
             width: MediaQuery.of(context).size.width,
             // margin: EdgeInsets.symmetric(horizontal: 20),
-            padding: EdgeInsets.symmetric(horizontal: 15),
+            padding: const EdgeInsets.symmetric(horizontal: 15),
             child: Column(
               children: [
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
+                    const Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         // CircleAvatar(
@@ -1213,12 +1201,12 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                 TextStyle(fontSize: 10, color: Colors.white54)),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     Row(
                       children: [
-                        Flexible(
+                        const Flexible(
                           child: Text(
                             overflow: TextOverflow.ellipsis,
                             maxLines: 3,
@@ -1244,10 +1232,10 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
-                    Row(
+                    const Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Icon(
@@ -1315,21 +1303,21 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
   widgetTech() {
     return ListView.separated(
-        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
         shrinkWrap: true,
-        physics: BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         itemBuilder: (context, index) {
           return Container(
             // height: 100,
             width: MediaQuery.of(context).size.width,
             // margin: EdgeInsets.symmetric(horizontal: 20),
-            padding: EdgeInsets.symmetric(horizontal: 15),
+            padding: const EdgeInsets.symmetric(horizontal: 15),
             child: Column(
               children: [
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
+                    const Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         // CircleAvatar(
@@ -1364,12 +1352,12 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                 TextStyle(fontSize: 10, color: Colors.white54)),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     Row(
                       children: [
-                        Flexible(
+                        const Flexible(
                           child: Text(
                             overflow: TextOverflow.ellipsis,
                             maxLines: 3,
@@ -1395,10 +1383,10 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
-                    Row(
+                    const Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Icon(
@@ -1466,21 +1454,21 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
   widgetFinance() {
     return ListView.separated(
-        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
         shrinkWrap: true,
-        physics: BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         itemBuilder: (context, index) {
           return Container(
             // height: 100,
             width: MediaQuery.of(context).size.width,
             // margin: EdgeInsets.symmetric(horizontal: 20),
-            padding: EdgeInsets.symmetric(horizontal: 15),
+            padding: const EdgeInsets.symmetric(horizontal: 15),
             child: Column(
               children: [
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
+                    const Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         // CircleAvatar(
@@ -1515,12 +1503,12 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                 TextStyle(fontSize: 10, color: Colors.white54)),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     Row(
                       children: [
-                        Flexible(
+                        const Flexible(
                           child: Text(
                             overflow: TextOverflow.ellipsis,
                             maxLines: 3,
@@ -1546,10 +1534,10 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
-                    Row(
+                    const Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Icon(
@@ -1617,7 +1605,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
   // Drawer widget
 
-  WidgetBreakingNews1() {
+  widgetBreakingNews1() {
     return Theme(
       data: Theme.of(context).copyWith(dividerColor: Colors.transparent,),
       child: ExpansionTile(
@@ -1625,25 +1613,25 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         iconColor: Colors.white,
         // maintainState: true,
         textColor: Colors.white,
-        childrenPadding: EdgeInsets.only(bottom: 10),
+        childrenPadding: const EdgeInsets.only(bottom: 10),
         collapsedTextColor: Colors.white,
         collapsedIconColor: Colors.white,
-        title: Text("Breaking News",
+        title: const Text("Breaking News",
             style: TextStyle(color: Colors.white, fontSize: 20)),
         children: [
           ListView.separated(
-            physics: NeverScrollableScrollPhysics(),
-            padding: EdgeInsets.symmetric(horizontal: 35, vertical: 10),
+            physics: const NeverScrollableScrollPhysics(),
+            padding: const EdgeInsets.symmetric(horizontal: 35, vertical: 10),
             shrinkWrap: true,
             itemCount: homeController.bNewsList.length,
             itemBuilder: (context, index) {
               return Text(
                 homeController.bNewsList[index]??"",
-                style: TextStyle(color: Colors.white, fontSize: 18),
+                style: const TextStyle(color: Colors.white, fontSize: 18),
               );
             },
             separatorBuilder: (context, index) {
-              return SizedBox(
+              return const SizedBox(
                 height: 30,
               );
             },
@@ -1653,32 +1641,32 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     );
   }
 
-  WidgetPolitics1() {
+  widgetPolitics1() {
     return Theme(
       data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
       child: ExpansionTile(
         // backgroundColor: Colors.black,
         iconColor: Colors.white,
         textColor: Colors.white,
-        childrenPadding: EdgeInsets.only(bottom: 10),
+        childrenPadding: const EdgeInsets.only(bottom: 10),
         collapsedTextColor: Colors.white,
         collapsedIconColor: Colors.white,
         title:
-            Text("Politics", style: TextStyle(color: Colors.white, fontSize: 20)),
+            const Text("Politics", style: TextStyle(color: Colors.white, fontSize: 20)),
         children: [
           ListView.separated(
-            physics: NeverScrollableScrollPhysics(),
-            padding: EdgeInsets.symmetric(horizontal: 35, vertical: 10),
+            physics: const NeverScrollableScrollPhysics(),
+            padding: const EdgeInsets.symmetric(horizontal: 35, vertical: 10),
             shrinkWrap: true,
             itemCount: homeController.politicsList.length,
             itemBuilder: (context, index) {
               return Text(
                 homeController.politicsList[index]??"",
-                style: TextStyle(color: Colors.white, fontSize: 18),
+                style: const TextStyle(color: Colors.white, fontSize: 18),
               );
             },
             separatorBuilder: (context, index) {
-              return SizedBox(
+              return const SizedBox(
                 height: 30,
               );
             },
@@ -1688,32 +1676,32 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     );
   }
 
-  WidgetSports1() {
+  widgetSports1() {
     return Theme(
       data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
       child: ExpansionTile(
         // backgroundColor: Colors.black,
         iconColor: Colors.white,
         textColor: Colors.white,
-        childrenPadding: EdgeInsets.only(bottom: 10),
+        childrenPadding: const EdgeInsets.only(bottom: 10),
         collapsedTextColor: Colors.white,
         collapsedIconColor: Colors.white,
         title:
-            Text("Sports", style: TextStyle(color: Colors.white, fontSize: 20)),
+            const Text("Sports", style: TextStyle(color: Colors.white, fontSize: 20)),
         children: [
           ListView.separated(
-            physics: NeverScrollableScrollPhysics(),
-            padding: EdgeInsets.symmetric(horizontal: 35, vertical: 10),
+            physics: const NeverScrollableScrollPhysics(),
+            padding: const EdgeInsets.symmetric(horizontal: 35, vertical: 10),
             shrinkWrap: true,
             itemCount: homeController.sportsList.length,
             itemBuilder: (context, index) {
               return Text(
                 homeController.sportsList[index]??"",
-                style: TextStyle(color: Colors.white, fontSize: 18),
+                style: const TextStyle(color: Colors.white, fontSize: 18),
               );
             },
             separatorBuilder: (context, index) {
-              return SizedBox(
+              return const SizedBox(
                 height: 30,
               );
             },
@@ -1723,31 +1711,31 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     );
   }
 
-  WidgetTech1() {
+  widgetTech1() {
     return Theme(
       data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
       child: ExpansionTile(
         // backgroundColor: Colors.black,
         iconColor: Colors.white,
         textColor: Colors.white,
-        childrenPadding: EdgeInsets.only(bottom: 10),
+        childrenPadding: const EdgeInsets.only(bottom: 10),
         collapsedTextColor: Colors.white,
         collapsedIconColor: Colors.white,
-        title: Text("Tech", style: TextStyle(color: Colors.white, fontSize: 20)),
+        title: const Text("Tech", style: TextStyle(color: Colors.white, fontSize: 20)),
         children: [
           ListView.separated(
-            physics: NeverScrollableScrollPhysics(),
-            padding: EdgeInsets.symmetric(horizontal: 35, vertical: 10),
+            physics: const NeverScrollableScrollPhysics(),
+            padding: const EdgeInsets.symmetric(horizontal: 35, vertical: 10),
             shrinkWrap: true,
             itemCount: homeController.techList.length,
             itemBuilder: (context, index) {
               return Text(
                 homeController.techList[index]??"",
-                style: TextStyle(color: Colors.white, fontSize: 18),
+                style: const TextStyle(color: Colors.white, fontSize: 18),
               );
             },
             separatorBuilder: (context, index) {
-              return SizedBox(
+              return const SizedBox(
                 height: 30,
               );
             },
@@ -1757,32 +1745,32 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     );
   }
 
-  WidgetFinance1() {
+  widgetFinance1() {
     return Theme(
       data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
       child: ExpansionTile(
         // backgroundColor: Colors.black,
         iconColor: Colors.white,
         textColor: Colors.white,
-        childrenPadding: EdgeInsets.only(bottom: 10),
+        childrenPadding: const EdgeInsets.only(bottom: 10),
         collapsedTextColor: Colors.white,
         collapsedIconColor: Colors.white,
         title:
-            Text("Finance", style: TextStyle(color: Colors.white, fontSize: 20)),
+            const Text("Finance", style: TextStyle(color: Colors.white, fontSize: 20)),
         children: [
           ListView.separated(
-            physics: NeverScrollableScrollPhysics(),
-            padding: EdgeInsets.symmetric(horizontal: 35, vertical: 10),
+            physics: const NeverScrollableScrollPhysics(),
+            padding: const EdgeInsets.symmetric(horizontal: 35, vertical: 10),
             shrinkWrap: true,
             itemCount: homeController.financeList.length,
             itemBuilder: (context, index) {
               return Text(
                 homeController.financeList[index]??"",
-                style: TextStyle(color: Colors.white, fontSize: 18),
+                style: const TextStyle(color: Colors.white, fontSize: 18),
               );
             },
             separatorBuilder: (context, index) {
-              return SizedBox(
+              return const SizedBox(
                 height: 30,
               );
             },
@@ -1792,32 +1780,32 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     );
   }
 
-  WidgetLifestyle1() {
+  widgetLifestyle1() {
     return Theme(
       data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
       child: ExpansionTile(
         // backgroundColor: Colors.black,
         iconColor: Colors.white,
         textColor: Colors.white,
-        childrenPadding: EdgeInsets.only(bottom: 10),
+        childrenPadding: const EdgeInsets.only(bottom: 10),
         collapsedTextColor: Colors.white,
         collapsedIconColor: Colors.white,
-        title: Text("Lifestyle",
+        title: const Text("Lifestyle",
             style: TextStyle(color: Colors.white, fontSize: 20)),
         children: [
           ListView.separated(
-            physics: NeverScrollableScrollPhysics(),
-            padding: EdgeInsets.symmetric(horizontal: 35, vertical: 10),
+            physics: const NeverScrollableScrollPhysics(),
+            padding: const EdgeInsets.symmetric(horizontal: 35, vertical: 10),
             shrinkWrap: true,
             itemCount: homeController.lifeList.length,
             itemBuilder: (context, index) {
               return Text(
                 homeController.lifeList[index]??"",
-                style: TextStyle(color: Colors.white, fontSize: 18),
+                style: const TextStyle(color: Colors.white, fontSize: 18),
               );
             },
             separatorBuilder: (context, index) {
-              return SizedBox(
+              return const SizedBox(
                 height: 30,
               );
             },
@@ -1827,31 +1815,31 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     );
   }
 
-  WidgetWorld1() {
+  widgetWorld1() {
     return Theme(
       data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
       child: ExpansionTile(
         // backgroundColor: Colors.black,
         iconColor: Colors.white,
         textColor: Colors.white,
-        childrenPadding: EdgeInsets.only(bottom: 10),
+        childrenPadding: const EdgeInsets.only(bottom: 10),
         collapsedTextColor: Colors.white,
         collapsedIconColor: Colors.white,
-        title: Text("World", style: TextStyle(color: Colors.white, fontSize: 20)),
+        title: const Text("World", style: TextStyle(color: Colors.white, fontSize: 20)),
         children: [
           ListView.separated(
-            physics: NeverScrollableScrollPhysics(),
-            padding: EdgeInsets.symmetric(horizontal: 35, vertical: 10),
+            physics: const NeverScrollableScrollPhysics(),
+            padding: const EdgeInsets.symmetric(horizontal: 35, vertical: 10),
             shrinkWrap: true,
             itemCount:homeController.worldlist.length,
             itemBuilder: (context, index) {
               return Text(
-                homeController.worldlist[index].toString()??"",
-                style: TextStyle(color: Colors.white, fontSize: 18),
+                homeController.worldlist[index].toString(),
+                style: const TextStyle(color: Colors.white, fontSize: 18),
               );
             },
             separatorBuilder: (context, index) {
-              return SizedBox(
+              return const SizedBox(
                 height: 30,
               );
             },
@@ -1861,32 +1849,32 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     );
   }
 
-  WidgetArtsAndEntertainment1() {
+  widgetArtsAndEntertainment1() {
     return Theme(
       data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
       child: ExpansionTile(
         // backgroundColor: Colors.black,
         iconColor: Colors.white,
         textColor: Colors.white,
-        childrenPadding: EdgeInsets.only(bottom: 10),
+        childrenPadding: const EdgeInsets.only(bottom: 10),
         collapsedTextColor: Colors.white,
         collapsedIconColor: Colors.white,
-        title: Text("Arts & Entertainment",
+        title: const Text("Arts & Entertainment",
             style: TextStyle(color: Colors.white, fontSize: 20)),
         children: [
           ListView.separated(
-            physics: NeverScrollableScrollPhysics(),
-            padding: EdgeInsets.symmetric(horizontal: 35, vertical: 10),
+            physics: const NeverScrollableScrollPhysics(),
+            padding: const EdgeInsets.symmetric(horizontal: 35, vertical: 10),
             shrinkWrap: true,
             itemCount: homeController.artsList.length,
             itemBuilder: (context, index) {
               return Text(
                 homeController.artsList[index]??"",
-                style: TextStyle(color: Colors.white, fontSize: 18),
+                style: const TextStyle(color: Colors.white, fontSize: 18),
               );
             },
             separatorBuilder: (context, index) {
-              return SizedBox(
+              return const SizedBox(
                 height: 30,
               );
             },
@@ -1896,32 +1884,32 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     );
   }
 
-  WidgetConflictAndDefence1() {
+  widgetConflictAndDefence1() {
     return Theme(
       data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
       child: ExpansionTile(
         // backgroundColor: Colors.black,
         iconColor: Colors.white,
         textColor: Colors.white,
-        childrenPadding: EdgeInsets.only(bottom: 10),
+        childrenPadding: const EdgeInsets.only(bottom: 10),
         collapsedTextColor: Colors.white,
         collapsedIconColor: Colors.white,
-        title: Text("Conflict & Defence",
+        title: const Text("Conflict & Defence",
             style: TextStyle(color: Colors.white, fontSize: 20)),
         children: [
           ListView.separated(
-            physics: NeverScrollableScrollPhysics(),
-            padding: EdgeInsets.symmetric(horizontal: 35, vertical: 10),
+            physics: const NeverScrollableScrollPhysics(),
+            padding: const EdgeInsets.symmetric(horizontal: 35, vertical: 10),
             shrinkWrap: true,
             itemCount: homeController.confictList.length,
             itemBuilder: (context, index) {
               return Text(
                 homeController.confictList[index]??"",
-                style: TextStyle(color: Colors.white, fontSize: 18),
+                style: const TextStyle(color: Colors.white, fontSize: 18),
               );
             },
             separatorBuilder: (context, index) {
-              return SizedBox(
+              return const SizedBox(
                 height: 30,
               );
             },
